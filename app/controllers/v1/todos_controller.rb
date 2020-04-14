@@ -4,12 +4,16 @@ module V1
   class TodosController < ApplicationController
     def create
       todo = Todo.new(todo_params)
+      todo.save!
 
-      if todo.save
-        render json: todo, serializer: TodoSerializer, status: :created
-      else
-        render json: { errors: todo.errors.full_messages }, status: :unprocessable_entity
-      end
+      render json: todo, serializer: TodoSerializer, status: :created
+    end
+
+    def destroy
+      todo = Todo.find(params[:id])
+      todo.destroy!
+
+      render head: :no_content
     end
 
     private
