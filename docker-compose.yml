@@ -1,0 +1,27 @@
+version: '3'
+volumes:
+  bundle:
+  mysql:
+services:
+  app:
+    build: .
+    ports:
+      - 3000:3000 # rails server
+      - 3035:3035 # webpack-dev-server
+    volumes:
+      - bundle:/usr/local/bundle:cached
+      - .:/app:delegated
+    environment:
+      - APP_DATABASE_HOST=db # rails newした後、database.ymlでhostを `APP_DATABASE_HOST` に設定する
+    stdin_open: true
+    tty: true
+    command: /bin/sh docker-start.sh
+
+  db:
+    image: mysql:5.7.12
+    volumes:
+      - mysql:/var/lib/mysql
+    environment:
+      - MYSQL_ALLOW_EMPTY_PASSWORD=yes
+    ports:
+      - 9000:3306
