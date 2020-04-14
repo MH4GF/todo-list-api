@@ -1,0 +1,31 @@
+name: Rails
+
+on: [push]
+
+jobs:
+
+  build:
+    runs-on: ubuntu-latest
+
+    services:
+      mysql:
+        image: mysql:5.7
+        options: --health-cmd "mysqladmin ping -h localhost" --health-interval 20s --health-timeout 10s --health-retries 10
+
+    container:
+      image: ruby:2.6.5
+        env:
+          APP_DATABASE_NAME: app_test
+          APP_DATABASE_USERNAME: root
+          APP_DATABASE_HOST: mysql
+
+    steps:
+      - uses: actions/checkout@v1
+      - name: Build and setup
+        run: |
+          gem install bundler --no-document -v $(grep "BUNDLED WITH" -1 Gemfile.lock | tail -n 1)
+          bundle config set deployment 'true'
+          bundle install --jobs 4 --retry 3
+          bundle exec rails db:create db:migrate
+      - name: Exec rubocop
+        run: bundle exec rubocop
