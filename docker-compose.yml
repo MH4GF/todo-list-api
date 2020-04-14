@@ -12,6 +12,8 @@ services:
       - bundle:/usr/local/bundle:cached
       - .:/app:delegated
     environment:
+      - APP_DATABASE_NAME=app_development
+      - APP_DATABASE_USERNAME=root
       - APP_DATABASE_HOST=db # rails newした後、database.ymlでhostを `APP_DATABASE_HOST` に設定する
     stdin_open: true
     tty: true
