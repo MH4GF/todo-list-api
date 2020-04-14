@@ -6,6 +6,8 @@ AllCops:
     - 'config/**/*'
     - 'Rakefile'
     - 'lib/tasks/auto_annotate_models.rake'
+    - 'spec/spec_helper.rb'
+    - 'spec/rails_helper.rb'
 
 Lint/RaiseException:
   Enabled: true
@@ -22,3 +24,8 @@ Layout/LineLength:
   Max: 120
 Style/Documentation:
   Enabled: false
+Style/TrailingCommaInHashLiteral:
+  EnforcedStyleForMultiline: consistent_comma
+Metrics/BlockLength:
+  Exclude:
+    - 'spec/**/*'

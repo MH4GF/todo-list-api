@@ -11,7 +11,10 @@
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
-class UserSerializer < ActiveModel::Serializer
-  attributes :id, :name, :email
-  has_many :todos
+FactoryBot.define do
+  factory :user do
+    name { '山田太郎' }
+    sequence(:email) { |n| "person#{n}@example.com" }
+    uid { SecureRandom.urlsafe_base64(48) }
+  end
 end

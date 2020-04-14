@@ -1,4 +1,6 @@
 # frozen_string_literal: true
 
-class V1::UsersController < ApplicationController
+module V1
+  class UsersController < ApplicationController
+  end
 end
