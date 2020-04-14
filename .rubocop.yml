@@ -5,6 +5,7 @@ AllCops:
     - 'bin/**/*'
     - 'config/**/*'
     - 'Rakefile'
+    - 'lib/tasks/auto_annotate_models.rake'
 
 Lint/RaiseException:
   Enabled: true
