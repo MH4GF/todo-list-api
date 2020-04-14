@@ -10,14 +10,13 @@ jobs:
     services:
       mysql:
         image: mysql:5.7
-        options: --health-cmd "mysqladmin ping -h localhost" --health-interval 20s --health-timeout 10s --health-retries 10
 
     container:
-      image: ruby:2.6.5
-        env:
-          APP_DATABASE_NAME: app_test
-          APP_DATABASE_USERNAME: root
-          APP_DATABASE_HOST: mysql
+      image: ruby:2.7.0
+      env:
+        APP_DATABASE_NAME: app_test
+        APP_DATABASE_USERNAME: root
+        APP_DATABASE_HOST: mysql
 
     steps:
       - uses: actions/checkout@v1
