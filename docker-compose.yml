@@ -6,8 +6,7 @@ services:
   app:
     build: .
     ports:
-      - 3000:3000 # rails server
-      - 3035:3035 # webpack-dev-server
+      - 3001:3000
     volumes:
       - bundle:/usr/local/bundle:cached
       - .:/app:delegated
@@ -18,13 +17,11 @@ services:
       - WEB_CONCURRENCY=0
     stdin_open: true
     tty: true
-    command: /bin/sh docker-start.sh
-
+    command: /bin/bash -c 'bundle install; rails s -b 0.0.0.0 -p 3000;'
   db:
     image: mysql:5.7.12
     volumes:
       - mysql:/var/lib/mysql
     environment:
       - MYSQL_ALLOW_EMPTY_PASSWORD=yes
-    ports:
-      - 9000:3306
+
