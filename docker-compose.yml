@@ -17,7 +17,7 @@ services:
       - WEB_CONCURRENCY=0
     stdin_open: true
     tty: true
-    command: /bin/bash -c 'bundle install; rails s -b 0.0.0.0 -p 3000;'
+    command: /bin/bash -c 'rm -f /app/tmp/pids/server.pid; bundle install; rails s -b 0.0.0.0 -p 3000;'
   db:
     image: mysql:5.7.12
     volumes:
