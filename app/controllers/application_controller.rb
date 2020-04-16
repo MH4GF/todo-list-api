@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
 class ApplicationController < ActionController::API
+  include DeviseTokenAuth::Concerns::SetUserByToken
+  before_action :authenticate_user!, unless: :devise_controller?
+
   rescue_from ActiveRecord::RecordNotFound, with: :error404
   rescue_from ActiveRecord::RecordInvalid, with: :error422
 
