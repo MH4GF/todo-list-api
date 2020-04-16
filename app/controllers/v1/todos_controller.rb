@@ -2,6 +2,10 @@
 
 module V1
   class TodosController < ApplicationController
+    def index
+      render json: current_user.todos, each_serializer: TodoSerializer
+    end
+
     def create
       todo = Todo.new(todo_params)
       todo.save!

@@ -24,9 +24,10 @@
 # v1_users_auth_validate_token GET    /v1/users/auth/validate_token(.:format) devise_token_auth/token_validations#validate_token
 
 Rails.application.routes.draw do
+  mount_devise_token_auth_for 'User', at: 'v1/users/auth'
+
   namespace :v1 do
-    mount_devise_token_auth_for 'User', at: 'users/auth'
-    resources :todos, only: [:create, :destroy]
+    resources :todos, only: [:index, :create, :destroy]
     resources :users, only: [:index, :show, :create]
   end
 end
