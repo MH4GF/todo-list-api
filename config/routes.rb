@@ -25,8 +25,8 @@
 
 Rails.application.routes.draw do
   namespace :v1 do
+    mount_devise_token_auth_for 'User', at: 'users/auth'
     resources :todos, only: [:create, :destroy]
     resources :users, only: [:index, :show, :create]
-    mount_devise_token_auth_for 'User', at: 'users/auth'
   end
 end
